@@ -1,4 +1,20 @@
-# Arquivo de ambiente com senhas reais
-.env
+# Dependências
+node_modules/
 
-# Não ignorar .htaccess nem .env.example
+# Ambiente (descomente em produção)
+# .env
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+
+# Vercel
+.vercel/

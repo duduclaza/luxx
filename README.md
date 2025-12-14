@@ -1,6 +1,13 @@
 # TOTEM LUXX - Sistema de Autoatendimento
 
-Sistema SaaS para totens de autoatendimento em bares, restaurantes e eventos.
+Sistema SaaS para totems de autoatendimento em bares, restaurantes e eventos.
+
+## 🚀 Stack Tecnológico
+
+- **Backend**: Node.js + Express
+- **Frontend**: HTML5, CSS3, Tailwind CSS
+- **Banco de Dados**: MariaDB (Hostinger Remoto)
+- **Deploy**: Vercel
 
 ## 📋 Funcionalidades
 
@@ -11,125 +18,104 @@ Sistema SaaS para totens de autoatendimento em bares, restaurantes e eventos.
 - 📺 **Painel**: Exibição de clientes para retirada
 - ⚙️ **Admin**: Configurações e relatórios
 
-## 🚀 Instalação
+## 🛠️ Instalação Local
 
-### Requisitos
-- PHP 8.0+
-- MySQL 5.7+ ou MariaDB 10.3+
-- Apache com mod_rewrite
+### 1. Clone o repositório
+```bash
+git clone <seu-repo>
+cd totem-luxx
+```
 
-### Passo a Passo
+### 2. Instale as dependências
+```bash
+npm install
+```
 
-1. **Faça upload dos arquivos para seu servidor**
-   
-   Suba todos os arquivos para a pasta `public_html` ou configure o DocumentRoot para a pasta `public/`
+### 3. Configure o ambiente
+```bash
+cp .env.example .env
+```
 
-2. **Configure o .env**
-   
-   ```bash
-   cp .env.example .env
-   ```
-   
-   Edite o arquivo `.env` com suas configurações:
-   ```
-   DB_HOST=localhost
-   DB_DATABASE=nome_do_banco
-   DB_USERNAME=seu_usuario
-   DB_PASSWORD=sua_senha
-   ```
+Edite o `.env` com as credenciais do seu banco MariaDB no Hostinger:
+```
+DB_HOST=seu_host.hostinger.com
+DB_PORT=3306
+DB_DATABASE=u230868210_totemluxx
+DB_USERNAME=seu_usuario
+DB_PASSWORD=sua_senha
 
-3. **Crie o banco de dados**
-   
-   ```bash
-   php database/migrations.php
-   ```
-   
-   Ou acesse via navegador: `seusite.com/database/migrations.php`
-   
-   **⚠️ IMPORTANTE**: Delete o arquivo migrations.php após executar!
+SESSION_SECRET=uma_chave_secreta_muito_longa_e_segura
+```
 
-4. **Configure permissões**
-   
-   ```bash
-   chmod 755 public/
-   chmod 644 .env
-   ```
+### 4. Execute o servidor
+```bash
+npm run dev
+```
 
-5. **Acesse o sistema**
-   
-   - URL: `https://blue-moose-166502.hostingersite.com`
-   - Email: `du.claza@gmail.com`
-   - Senha: `admin123`
-   - PIN Admin: `1234`
+Acesse: http://localhost:3000
 
-   **⚠️ MUDE A SENHA E PIN IMEDIATAMENTE!**
+## 🚀 Deploy no Vercel
 
-## 📁 Estrutura de Pastas
+### 1. Instale o Vercel CLI
+```bash
+npm i -g vercel
+```
+
+### 2. Faça login
+```bash
+vercel login
+```
+
+### 3. Deploy
+```bash
+vercel --prod
+```
+
+### 4. Configure as variáveis de ambiente no Vercel
+No dashboard do Vercel, adicione as variáveis:
+- `DB_HOST`
+- `DB_PORT`
+- `DB_DATABASE`
+- `DB_USERNAME`
+- `DB_PASSWORD`
+- `SESSION_SECRET`
+- `NODE_ENV=production`
+
+## 📁 Estrutura do Projeto
 
 ```
 TOTEM LUXX/
-├── app/
-│   ├── api/           # APIs REST
-│   ├── pages/         # Páginas PHP
-│   │   ├── admin/     # Painel administrativo
-│   │   └── modulos/   # Módulos do totem
-│   ├── views/         # Templates (futuro)
-│   └── helpers.php    # Funções utilitárias
 ├── config/
-│   └── database.php   # Configuração do banco
-├── database/
-│   └── migrations.php # Criação das tabelas
-├── public/            # DocumentRoot
-│   ├── assets/
-│   │   ├── css/
-│   │   ├── js/
-│   │   ├── img/
-│   │   └── audio/
-│   ├── .htaccess
-│   └── index.php      # Entry point
-├── .env.example
-└── README.md
+│   └── database.js      # Conexão MariaDB
+├── routes/
+│   ├── api/
+│   │   ├── auth.js      # API de autenticação
+│   │   ├── pedidos.js   # API de pedidos
+│   │   ├── chamadas.js  # API de chamadas
+│   │   └── produtos.js  # API de produtos
+│   └── pages.js         # Rotas de páginas
+├── public/
+│   ├── login.html
+│   ├── modulos.html
+│   ├── cozinha.html
+│   ├── bar.html
+│   ├── cardapio.html
+│   ├── bilheteria.html
+│   ├── painel.html
+│   └── assets/
+├── server.js            # Entry point Express
+├── vercel.json          # Configuração Vercel
+├── package.json
+└── .env.example
 ```
 
-## 🔧 Configuração no Hostinger
+## 🔐 Credenciais Padrão
 
-1. Acesse o **hPanel** do Hostinger
-2. Vá em **Gerenciador de Arquivos**
-3. Suba os arquivos para `public_html`
-4. Configure o `.env` com os dados do banco MySQL
-5. Execute as migrations
+- **Email**: du.claza@gmail.com
+- **Senha**: admin123
+- **PIN Admin**: 1234
 
-### Banco de Dados MySQL
-- Host: `localhost` (ou o fornecido pelo Hostinger)
-- Crie um banco pelo hPanel em **Bancos de Dados MySQL**
-- Use as credenciais no `.env`
-
-## 💳 Integração Mercado Pago
-
-Cada cliente configura seu próprio token no painel Admin:
-1. Acesse `/admin/configuracoes`
-2. Insira o **Access Token** do Mercado Pago
-3. Insira a **Public Key**
-
-Para obter as credenciais:
-1. Acesse [developers.mercadopago.com](https://developers.mercadopago.com)
-2. Crie uma aplicação
-3. Copie as credenciais de produção
-
-## 📱 Uso nos Totens
-
-1. Faça login no sistema
-2. Selecione o módulo desejado (Cozinha, Bar, etc.)
-3. O módulo ficará em tela cheia
-4. Para sair, insira o PIN do administrador
-
-## 🔒 Segurança
-
-- Senhas criptografadas com bcrypt
-- Sessões seguras
-- Proteção contra SQL Injection (PDO prepared statements)
-- XSS Prevention (sanitização de inputs)
-- CSRF tokens (em desenvolvimento)
+⚠️ **MUDE ESSAS CREDENCIAIS IMEDIATAMENTE!**
 
 ## 📞 Suporte
 
