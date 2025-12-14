@@ -1,8 +1,8 @@
 # Dependências
 node_modules/
 
-# Ambiente (descomente em produção)
-# .env
+# Ambiente
+.env
 
 # Logs
 *.log

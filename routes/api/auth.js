@@ -13,7 +13,7 @@ router.post('/login', async (req, res) => {
         }
 
         const cliente = await db.fetchOne(
-            'SELECT * FROM clientes WHERE email = ? AND ativo = 1',
+            'SELECT * FROM clientes WHERE email = $1 AND ativo = true',
             [email]
         );
 
@@ -70,7 +70,7 @@ router.post('/verify-pin', async (req, res) => {
         const { pin } = req.body;
 
         const cliente = await db.fetchOne(
-            'SELECT pin_admin FROM clientes WHERE id = ?',
+            'SELECT pin_admin FROM clientes WHERE id = $1',
             [req.session.clienteId]
         );
 
@@ -95,7 +95,7 @@ router.get('/me', async (req, res) => {
 
     try {
         const cliente = await db.fetchOne(
-            'SELECT id, nome_local, email, cidade, estado, plano, is_owner FROM clientes WHERE id = ?',
+            'SELECT id, nome_local, email, cidade, estado, plano, is_owner FROM clientes WHERE id = $1',
             [req.session.clienteId]
         );
 
@@ -120,13 +120,16 @@ router.post('/register', async (req, res) => {
         }
 
         // Verificar se email já existe
-        const existe = await db.fetchOne('SELECT id FROM clientes WHERE email = ?', [email]);
+        const existe = await db.fetchOne('SELECT id FROM clientes WHERE email = $1', [email]);
         if (existe) {
             return res.status(400).json({ success: false, error: 'Email já cadastrado' });
         }
 
         // Hash da senha
         const senhaHash = await bcrypt.hash(senha, 10);
+
+        // Data de vencimento (30 dias)
+        const dataVencimento = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
 
         // Criar cliente
         const clienteId = await db.insert('clientes', {
@@ -138,7 +141,7 @@ router.post('/register', async (req, res) => {
             estado,
             telefone: telefone || null,
             plano: 'basic',
-            data_vencimento: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // 30 dias
+            data_vencimento: dataVencimento,
             is_owner: false,
             ativo: true
         });
