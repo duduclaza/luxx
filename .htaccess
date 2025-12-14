@@ -1,5 +1,12 @@
 RewriteEngine On
+RewriteBase /
 
-# Redirecionar tudo para a pasta public
+# Se o arquivo existe em public/assets, servir diretamente
+RewriteCond %{REQUEST_URI} ^/assets/
+RewriteRule ^assets/(.*)$ public/assets/$1 [L]
+
+# Se não está acessando public/ diretamente, redirecionar para public/index.php
 RewriteCond %{REQUEST_URI} !^/public/
-RewriteRule ^(.*)$ /public/$1 [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ public/index.php [L,QSA]

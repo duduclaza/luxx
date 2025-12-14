@@ -1,1 +1,4 @@
-/.env.example
+# Arquivo de ambiente com senhas reais
+.env
+
+# Não ignorar .htaccess nem .env.example
