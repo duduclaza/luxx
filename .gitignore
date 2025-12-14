@@ -3,6 +3,7 @@ node_modules/
 
 # Ambiente
 .env
+.env.vercel
 
 # Logs
 *.log

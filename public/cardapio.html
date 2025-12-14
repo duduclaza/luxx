@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio - TOTEM LUXX</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .product-card:hover {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen text-white">
+    <!-- Header -->
+    <header class="bg-slate-900/90 backdrop-blur-lg border-b border-white/10 px-6 py-4 sticky top-0 z-50">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div
+                    class="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center text-xl">
+                    📋</div>
+                <div>
+                    <h1 class="text-lg font-bold">Cardápio Digital</h1>
+                    <p id="nomeLocal" class="text-gray-400 text-xs">TOTEM LUXX</p>
+                </div>
+            </div>
+            <button onclick="openExitModal()" class="p-2 bg-slate-800 hover:bg-slate-700 rounded-lg">
+                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="p-6">
+        <div class="max-w-6xl mx-auto">
+            <!-- Categorias -->
+            <div class="flex gap-3 mb-6 overflow-x-auto pb-2">
+                <button
+                    class="px-4 py-2 bg-purple-600 rounded-full text-sm font-medium whitespace-nowrap">Todos</button>
+                <button
+                    class="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-full text-sm font-medium whitespace-nowrap">Lanches</button>
+                <button
+                    class="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-full text-sm font-medium whitespace-nowrap">Bebidas</button>
+                <button
+                    class="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-full text-sm font-medium whitespace-nowrap">Porções</button>
+            </div>
+
+            <!-- Produtos -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="produtosGrid">
+                <div class="glass-card rounded-xl p-4 text-center">
+                    <div
+                        class="w-20 h-20 bg-gradient-to-br from-orange-400 to-red-500 rounded-xl mx-auto mb-3 flex items-center justify-center text-3xl">
+                        🍔</div>
+                    <h3 class="font-semibold mb-1">X-Burger</h3>
+                    <p class="text-green-400 font-bold">R$ 18,00</p>
+                    <button
+                        class="mt-3 w-full py-2 bg-purple-600 hover:bg-purple-500 rounded-lg text-sm font-medium">Adicionar</button>
+                </div>
+                <div class="glass-card rounded-xl p-4 text-center">
+                    <div
+                        class="w-20 h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl mx-auto mb-3 flex items-center justify-center text-3xl">
+                        🍟</div>
+                    <h3 class="font-semibold mb-1">Batata Frita</h3>
+                    <p class="text-green-400 font-bold">R$ 12,00</p>
+                    <button
+                        class="mt-3 w-full py-2 bg-purple-600 hover:bg-purple-500 rounded-lg text-sm font-medium">Adicionar</button>
+                </div>
+                <div class="glass-card rounded-xl p-4 text-center">
+                    <div
+                        class="w-20 h-20 bg-gradient-to-br from-amber-400 to-yellow-500 rounded-xl mx-auto mb-3 flex items-center justify-center text-3xl">
+                        🍺</div>
+                    <h3 class="font-semibold mb-1">Cerveja</h3>
+                    <p class="text-green-400 font-bold">R$ 8,00</p>
+                    <button
+                        class="mt-3 w-full py-2 bg-purple-600 hover:bg-purple-500 rounded-lg text-sm font-medium">Adicionar</button>
+                </div>
+                <div class="glass-card rounded-xl p-4 text-center">
+                    <div
+                        class="w-20 h-20 bg-gradient-to-br from-red-400 to-pink-500 rounded-xl mx-auto mb-3 flex items-center justify-center text-3xl">
+                        🥤</div>
+                    <h3 class="font-semibold mb-1">Refrigerante</h3>
+                    <p class="text-green-400 font-bold">R$ 6,00</p>
+                    <button
+                        class="mt-3 w-full py-2 bg-purple-600 hover:bg-purple-500 rounded-lg text-sm font-medium">Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Carrinho Flutuante -->
+    <div
+        class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-purple-600 hover:bg-purple-500 rounded-full px-6 py-3 flex items-center gap-3 shadow-lg shadow-purple-500/30 cursor-pointer">
+        <span
+            class="bg-white text-purple-600 w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold">0</span>
+        <span class="font-medium">Ver Carrinho</span>
+        <span class="font-bold">R$ 0,00</span>
+    </div>
+
+    <!-- Modal PIN -->
+    <div id="exitModal" class="fixed inset-0 bg-black/80 backdrop-blur hidden items-center justify-center z-50">
+        <div class="bg-slate-800/95 rounded-2xl p-6 w-full max-w-sm border border-white/10">
+            <h3 class="text-xl font-bold text-center mb-4">🔒 PIN do Admin</h3>
+            <form id="exitForm">
+                <input type="password" id="pinInput" maxlength="6" inputmode="numeric"
+                    class="w-full bg-slate-900 border border-white/20 rounded-xl py-4 text-center text-2xl tracking-widest focus:outline-none focus:border-purple-500"
+                    placeholder="••••">
+                <p id="pinError" class="text-red-400 text-sm text-center mt-2 hidden">PIN incorreto</p>
+                <div class="flex gap-3 mt-6">
+                    <button type="button" onclick="closeExitModal()"
+                        class="flex-1 py-3 bg-slate-700 rounded-xl">Cancelar</button>
+                    <button type="submit" class="flex-1 py-3 bg-purple-600 rounded-xl font-medium">Confirmar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Verificar login
+        const userData = localStorage.getItem('totemUser');
+        if (!userData) window.location.href = '/login';
+        else {
+            const user = JSON.parse(userData);
+            document.getElementById('nomeLocal').textContent = user.nome || 'TOTEM LUXX';
+        }
+
+        // Exit modal
+        function openExitModal() { document.getElementById('exitModal').classList.remove('hidden'); document.getElementById('exitModal').classList.add('flex'); }
+        function closeExitModal() { document.getElementById('exitModal').classList.add('hidden'); document.getElementById('exitModal').classList.remove('flex'); }
+
+        document.getElementById('exitForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const user = JSON.parse(localStorage.getItem('totemUser'));
+            if (document.getElementById('pinInput').value === user.pin_admin) {
+                window.location.href = '/modulos';
+            } else {
+                document.getElementById('pinError').classList.remove('hidden');
+                document.getElementById('pinInput').value = '';
+            }
+        });
+    </script>
+</body>
+
+</html>
