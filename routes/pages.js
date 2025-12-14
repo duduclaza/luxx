@@ -46,8 +46,8 @@ router.get('/logout', (req, res) => {
 // PÁGINAS PROTEGIDAS
 // ============================================
 
-// Seleção de módulos
-router.get('/modulos', requireAuth, (req, res) => {
+// Seleção de módulos (sem auth por enquanto - Vercel serverless)
+router.get('/modulos', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/modulos.html'));
 });
 
