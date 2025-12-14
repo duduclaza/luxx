@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página não encontrada - TOTEM LUXX</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%); }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen flex items-center justify-center">
+    <div class="text-center">
+        <h1 class="text-9xl font-bold text-purple-500">404</h1>
+        <p class="text-2xl text-white mt-4">Página não encontrada</p>
+        <p class="text-gray-400 mt-2">A página que você procura não existe.</p>
+        <a href="/" class="inline-block mt-6 px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-xl transition-colors">
+            Voltar ao início
+        </a>
+    </div>
+</body>
+</html>
