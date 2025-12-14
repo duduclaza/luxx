@@ -214,16 +214,23 @@
     </div>
 
     <script>
-        // Carregar dados do usuário
-        fetch('/api/auth/me')
-            .then(r => r.json())
-            .then(data => {
-                if (data.loggedIn && data.cliente) {
-                    document.getElementById('nomeLocal').textContent = data.cliente.nome_local;
-                    document.getElementById('localizacao').textContent = `${data.cliente.cidade} - ${data.cliente.estado}`;
-                    document.getElementById('userEmail').textContent = data.cliente.email;
-                }
-            });
+        // Verificar se está logado via localStorage
+        const userData = localStorage.getItem('totemUser');
+        if (!userData) {
+            window.location.href = '/login';
+        } else {
+            const user = JSON.parse(userData);
+            document.getElementById('nomeLocal').textContent = user.nome || 'TOTEM LUXX';
+            document.getElementById('localizacao').textContent = user.cidade && user.estado ? `${user.cidade} - ${user.estado}` : '';
+            document.getElementById('userEmail').textContent = user.email || '';
+        }
+
+        // Logout
+        document.querySelector('a[href="/logout"]').addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('totemUser');
+            window.location.href = '/login';
+        });
     </script>
 </body>
 

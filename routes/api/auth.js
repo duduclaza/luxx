@@ -44,7 +44,10 @@ router.post('/login', async (req, res) => {
             cliente: {
                 id: cliente.id,
                 nome: cliente.nome_local,
-                email: cliente.email
+                email: cliente.email,
+                cidade: cliente.cidade,
+                estado: cliente.estado,
+                pin_admin: cliente.pin_admin
             }
         });
 
